@@ -1,0 +1,56 @@
+{
+    "name": "decodelabs/indoctrination",
+    "description": "Doctrine DBAL and ORM integration tools",
+    "type": "library",
+    "keywords": [ ],
+    "license": "MIT",
+    "authors": [ {
+            "name": "Tom Wright",
+            "email": "tom@inflatablecookie.com"
+        } ],
+    "require": {
+        "php": "^8.1",
+        "decodelabs/dovetail": "^0.2.2",
+        "decodelabs/exceptional": "^0.4.4",
+        "decodelabs/guidance": "^0.1.7",
+        "decodelabs/slingshot": "^0.1.4",
+        "decodelabs/stash": "^0.3.0",
+        "decodelabs/veneer": "^0.10.24",
+
+        "doctrine/orm": "^2.17",
+        "doctrine/dbal": "^3.7",
+        "doctrine/migrations": "^3.7"
+    },
+    "require-dev": {
+        "decodelabs/cipher": "^0.1.1",
+        "decodelabs/clip": "^0.3.10",
+        "decodelabs/genesis": "^0.8.3",
+        "decodelabs/glitch": "^0.18.10",
+        "decodelabs/phpstan-decodelabs": "^0.6.7",
+        "martin-georgiev/postgresql-for-doctrine": "^2.1",
+        "nesbot/carbon": "^2.72"
+    },
+    "suggest": {
+        "decodelabs/cipher": "JWT token support",
+        "decodelabs/clip": "Command line tools",
+        "martin-georgiev/postgresql-for-doctrine": "Extended PostgreSQL support for Doctrine",
+        "nesbot/carbon": "Better Date/time handling"
+    },
+    "autoload": {
+        "psr-4": {
+            "DecodeLabs\\Indoctrination\\": "src/Indoctrination/"
+        },
+        "classmap": [
+            "src/Clip/",
+            "src/Dovetail/"
+        ],
+        "files": [
+            "src/Indoctrination/Context.php"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.1.x-dev"
+        }
+    }
+}
