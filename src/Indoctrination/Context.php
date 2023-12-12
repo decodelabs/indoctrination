@@ -245,6 +245,12 @@ class Context
 
     /**
      * Transaction with RLS
+     *
+     * @template TReturn
+     * @template TPayload of CipherPayload
+     * @param TPayload $payload
+     * @param Closure(EntityManager, TPayload):TReturn $callback
+     * @return TReturn
      */
     public function withJwt(
         CipherPayload $payload,
@@ -272,6 +278,10 @@ SQL
 
     /**
      * Bypass RLS
+     *
+     * @template TReturn
+     * @param Closure(EntityManager):TReturn $callback
+     * @return TReturn
      */
     public function bypassJwt(
         Closure $callback,
