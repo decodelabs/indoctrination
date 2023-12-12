@@ -28,6 +28,7 @@ class Carbon implements Extension
             );
         }
 
+        Type::overrideType('date', DateTimeType::class);
         Type::overrideType('datetime', DateTimeType::class);
         Type::overrideType('datetime_immutable', DateTimeImmutableType::class);
     }
