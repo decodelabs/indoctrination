@@ -1,3 +1,5 @@
+* Fixed JWT wrapper return types
+
 ## v0.1.1 (2023-12-12)
 * Added date as Carbon type
 * Pass Cipher payload as JWT wrapper argument
