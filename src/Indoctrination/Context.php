@@ -265,7 +265,7 @@ class Context
 SQL
             );
 
-            return $callback($entityManager);
+            return $callback($entityManager, $payload);
         });
     }
 
