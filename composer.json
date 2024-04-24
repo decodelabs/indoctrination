@@ -28,7 +28,7 @@
         "decodelabs/glitch": "^0.18.10",
         "decodelabs/phpstan-decodelabs": "^0.6.7",
         "martin-georgiev/postgresql-for-doctrine": "^2.1",
-        "nesbot/carbon": "^2.72"
+        "nesbot/carbon": "^2|^3"
     },
     "suggest": {
         "decodelabs/cipher": "JWT token support",

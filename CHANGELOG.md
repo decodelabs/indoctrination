@@ -1,3 +1,5 @@
+* Updated Carbon dependency
+
 ## v0.1.2 (2023-12-12)
 * Fixed JWT wrapper return types
 
