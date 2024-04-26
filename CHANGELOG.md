@@ -1,3 +1,4 @@
+## v0.2.0 (2024-04-26)
 * Upgraded Doctrine to ORM 3 and DBAL 4
 * Updated dependency list
 
