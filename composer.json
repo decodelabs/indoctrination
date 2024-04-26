@@ -10,11 +10,12 @@
         } ],
     "require": {
         "php": "^8.1",
+
         "decodelabs/dovetail": "^0.2.2",
         "decodelabs/exceptional": "^0.4.4",
         "decodelabs/guidance": "^0.1.7",
         "decodelabs/slingshot": "^0.1.4",
-        "decodelabs/stash": "^0.3.0",
+        "decodelabs/stash": "^0.5.0",
         "decodelabs/veneer": "^0.10.24",
 
         "doctrine/orm": "^2.17",
@@ -25,8 +26,8 @@
         "decodelabs/cipher": "^0.1.1",
         "decodelabs/clip": "^0.3.10",
         "decodelabs/genesis": "^0.8.3",
-        "decodelabs/glitch": "^0.18.10",
         "decodelabs/phpstan-decodelabs": "^0.6.7",
+
         "martin-georgiev/postgresql-for-doctrine": "^2.1",
         "nesbot/carbon": "^2|^3"
     },
