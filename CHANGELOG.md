@@ -1,3 +1,6 @@
+## v0.2.1 (2024-04-29)
+* Fixed Veneer stubs in gitattributes
+
 ## v0.2.0 (2024-04-26)
 * Upgraded Doctrine to ORM 3 and DBAL 4
 * Updated dependency list
