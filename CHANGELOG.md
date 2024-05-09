@@ -1,3 +1,5 @@
+* Added default proxy dir config
+
 ## v0.2.1 (2024-04-29)
 * Fixed Veneer stubs in gitattributes
 
