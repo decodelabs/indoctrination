@@ -173,6 +173,10 @@ class Context
             cache: Stash::load(__CLASS__)
         );
 
+        if (class_exists(Genesis::class)) {
+            $output->setProxyDir(Genesis::$hub->getLocalDataPath() . '/doctrine/proxies');
+        }
+
 
         // Schema filter
         $output->setSchemaAssetsFilter(function (
