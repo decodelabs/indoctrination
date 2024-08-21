@@ -16,7 +16,7 @@
         "decodelabs/guidance": "^0.1.7",
         "decodelabs/slingshot": "^0.1.4",
         "decodelabs/stash": "^0.5.0",
-        "decodelabs/veneer": "^0.11.2",
+        "decodelabs/veneer": "^0.11.6",
 
         "doctrine/orm": "^3",
         "doctrine/dbal": "^4",

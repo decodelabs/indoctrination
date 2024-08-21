@@ -1,3 +1,4 @@
+* Updated Veneer dependency and Stub
 * Removed unneeded LazyLoad binding attribute
 
 ## v0.2.3 (2024-07-17)
