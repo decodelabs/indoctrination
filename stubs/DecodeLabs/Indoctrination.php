@@ -16,8 +16,8 @@ class Indoctrination implements Proxy
 {
     use ProxyTrait;
 
-    const VENEER = 'DecodeLabs\\Indoctrination';
-    const VENEER_TARGET = Inst::class;
+    const Veneer = 'DecodeLabs\\Indoctrination';
+    const VeneerTarget = Inst::class;
 
     public static Inst $instance;
 

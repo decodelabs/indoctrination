@@ -21,7 +21,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 class Doctrine implements Task
 {
-    public const COMMANDS = [];
+    protected const Commands = [];
 
     public function execute(): bool
     {
@@ -48,7 +48,7 @@ class Doctrine implements Task
 
         ConsoleRunner::run(
             new SingleManagerProvider($entityManager),
-            self::COMMANDS
+            self::Commands
         );
     }
 

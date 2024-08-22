@@ -20,7 +20,6 @@ use DecodeLabs\Indoctrination;
 use DecodeLabs\Slingshot;
 use DecodeLabs\Stash;
 use DecodeLabs\Veneer;
-use DecodeLabs\Veneer\LazyLoad;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\AbstractAsset;
@@ -29,7 +28,6 @@ use Doctrine\ORM\Configuration as OrmConfig;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
-#[LazyLoad]
 class Context
 {
     protected static bool $init = false;
