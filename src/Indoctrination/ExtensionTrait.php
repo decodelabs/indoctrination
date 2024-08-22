@@ -14,6 +14,9 @@ use Doctrine\ORM\Configuration as OrmConfig;
 use Doctrine\ORM\EntityManager;
 use ReflectionClass;
 
+/**
+ * @phpstan-require-implements Extension
+ */
 trait ExtensionTrait
 {
     public function getName(): string

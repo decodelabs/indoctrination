@@ -61,10 +61,10 @@ class Uuid extends Type
             !is_string($value) &&
             !$value instanceof Stringable
         ) {
-            throw Exceptional::InvalidType([
-                'message' => 'Invalid type: ' . gettype($value),
-                'data' => $value
-            ]);
+            throw Exceptional::InvalidType(
+                message: 'Invalid type: ' . gettype($value),
+                data: $value
+            );
         }
 
         return Guidance::fromString($value);
@@ -94,10 +94,10 @@ class Uuid extends Type
             !is_string($value) &&
             !$value instanceof Stringable
         ) {
-            throw Exceptional::InvalidType([
-                'message' => 'Invalid type: ' . gettype($value),
-                'data' => $value
-            ]);
+            throw Exceptional::InvalidType(
+                message: 'Invalid type: ' . gettype($value),
+                data: $value
+            );
         }
 
         return Guidance::fromString($value)->$toString();
