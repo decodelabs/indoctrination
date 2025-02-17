@@ -118,15 +118,16 @@ class Context
 
         foreach (DoctrineConfig::load()->getExtensions($name) as $extName => $extConfig) {
             $class = Archetype::resolve(Extension::class, $extName);
+            /** @var array<string,mixed> $extConfig */
             $extension = $slingshot->newInstance($class, $extConfig);
-            $extName = $extension->getName();
+            $extName = $extension->name;
 
             if (!isset($this->extensions['__GLOBAL__'][$extName])) {
                 $this->extensions['__GLOBAL__'][$extName] = $extension;
                 $extension->loadGlobal();
             }
 
-            $extensions[$extension->getName()] = $extension;
+            $extensions[$extension->name] = $extension;
         }
 
         $this->extensions[$name] = $extensions;
@@ -159,17 +160,18 @@ class Context
 
 
         // Orm Config
-        $method = match ($config->getMetadataType($name)) {
-            MetadataType::Attributes => 'createAttributeMetadataConfiguration',
-            MetadataType::Annotations => 'createAnnotationMetadataConfiguration',
-            MetadataType::Xml => 'createXMLMetadataConfiguration'
+        $output = match ($config->getMetadataType($name)) {
+            MetadataType::Attributes => ORMSetup::createAttributeMetadataConfiguration(
+                paths: $paths,
+                isDevMode: $devMode,
+                cache: Stash::load(__CLASS__)
+            ),
+            MetadataType::Xml => ORMSetup::createXMLMetadataConfiguration(
+                paths: $paths,
+                isDevMode: $devMode,
+                cache: Stash::load(__CLASS__)
+            )
         };
-
-        $output = ORMSetup::$method(
-            paths: $paths,
-            isDevMode: $devMode,
-            cache: Stash::load(__CLASS__)
-        );
 
         if (class_exists(Genesis::class)) {
             $output->setProxyDir(Genesis::$hub->getLocalDataPath() . '/doctrine/proxies');
@@ -308,7 +310,7 @@ SQL
 }
 
 // Register
-Veneer::register(
+Veneer\Manager::getGlobalManager()->register(
     Context::class,
-    Indoctrination::class // @phpstan-ignore-line
+    Indoctrination::class
 );

@@ -12,6 +12,5 @@ namespace DecodeLabs\Indoctrination;
 enum MetadataType: string
 {
     case Attributes = 'attributes';
-    case Annotations = 'annotations';
     case Xml = 'xml';
 }

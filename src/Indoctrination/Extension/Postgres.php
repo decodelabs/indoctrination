@@ -36,7 +36,7 @@ class Postgres implements Extension
     {
         if (!class_exists(BooleanArray::class)) {
             throw Exceptional::ComponentUnavailable(
-                'Postgres extension requires the martin-georgiev/postgresql-for-doctrine package'
+                message: 'Postgres extension requires the martin-georgiev/postgresql-for-doctrine package'
             );
         }
 

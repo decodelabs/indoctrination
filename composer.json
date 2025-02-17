@@ -9,26 +9,27 @@
             "email": "tom@inflatablecookie.com"
         } ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.4",
 
-        "decodelabs/dovetail": "^0.2.2",
-        "decodelabs/exceptional": "^0.4.4",
-        "decodelabs/guidance": "^0.1.7",
-        "decodelabs/slingshot": "^0.1.4",
-        "decodelabs/stash": "^0.5.0",
-        "decodelabs/veneer": "^0.11.6",
+        "decodelabs/coercion": "^0.2.15",
+        "decodelabs/dovetail": "^0.2.9",
+        "decodelabs/exceptional": "^0.5.3",
+        "decodelabs/guidance": "^0.1.13",
+        "decodelabs/slingshot": "^0.1.12",
+        "decodelabs/stash": "^0.6",
+        "decodelabs/veneer": "^0.12.3",
 
-        "doctrine/orm": "^3",
-        "doctrine/dbal": "^4",
-        "doctrine/migrations": "^3.7"
+        "doctrine/orm": "^3.3.2",
+        "doctrine/dbal": "^4.2.2",
+        "doctrine/migrations": "^3.8.2"
     },
     "require-dev": {
-        "decodelabs/cipher": "^0.1.1",
-        "decodelabs/clip": "^0.3.10",
-        "decodelabs/genesis": "^0.9",
-        "decodelabs/phpstan-decodelabs": "^0.6.7",
+        "decodelabs/cipher": "^0.2",
+        "decodelabs/clip": "^0.3.16",
+        "decodelabs/genesis": "^0.10",
+        "decodelabs/phpstan-decodelabs": "^0.7",
 
-        "martin-georgiev/postgresql-for-doctrine": "^2.1",
+        "martin-georgiev/postgresql-for-doctrine": "^2.8",
         "nesbot/carbon": "^2|^3"
     },
     "suggest": {
@@ -51,7 +52,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "0.2.x-dev"
+            "dev-develop": "0.3.x-dev"
         }
     },
     "config": {

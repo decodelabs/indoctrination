@@ -59,7 +59,7 @@ class Doctrine implements Config, IndoctrinationConfig
         ?string $name = null
     ): string {
         $name = $this->normalizeName($name);
-        return $this->data->{$name}->sharedConnection->as('string');
+        return $this->data->__get($name)->sharedConnection->as('string');
     }
 
     /**
@@ -69,7 +69,7 @@ class Doctrine implements Config, IndoctrinationConfig
         ?string $name = null
     ): string {
         $name = $this->normalizeName($name);
-        return $this->data->{$name}->adminConnection->as('string');
+        return $this->data->__get($name)->adminConnection->as('string');
     }
 
 
@@ -80,7 +80,7 @@ class Doctrine implements Config, IndoctrinationConfig
         ?string $name = null
     ): array {
         $name = $this->normalizeName($name);
-        return $this->data->{$name}->paths->as('string[]');
+        return $this->data->__get($name)->paths->as('string[]');
     }
 
 
@@ -91,7 +91,7 @@ class Doctrine implements Config, IndoctrinationConfig
         ?string $name = null
     ): MetadataType {
         $name = $this->normalizeName($name);
-        $output = $this->data->{$name}->metadata->as('string');
+        $output = $this->data->__get($name)->metadata->as('string');
 
         if (!$output = MetadataType::tryFrom($output)) {
             $output = MetadataType::Attributes;
@@ -107,7 +107,8 @@ class Doctrine implements Config, IndoctrinationConfig
     public function getExtensions(
         ?string $name = null
     ): array {
-        $output = $this->data->{$name}->extensions->toArray();
+        $name = $this->normalizeName($name);
+        $output = $this->data->__get($name)->extensions->toArray();
 
         foreach ($output as $key => $value) {
             if (is_string($value)) {
@@ -122,6 +123,7 @@ class Doctrine implements Config, IndoctrinationConfig
             }
         }
 
+        /** @var array<string,array<mixed>> */
         return $output;
     }
 
@@ -133,7 +135,9 @@ class Doctrine implements Config, IndoctrinationConfig
         ?string $name = null
     ): array {
         $name = $this->normalizeName($name);
-        return $this->data->{$name}->migrations->toArray();
+        /** @var array<string,array<mixed>> $output */
+        $output = $this->data->__get($name)->migrations->toArray();
+        return $output;
     }
 
     /**
@@ -143,7 +147,7 @@ class Doctrine implements Config, IndoctrinationConfig
     {
         if (
             $name === null ||
-            !isset($this->data->{$name})
+            !$this->data->__isset($name)
         ) {
             $name = 'default';
         }

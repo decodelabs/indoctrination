@@ -19,9 +19,9 @@ use ReflectionClass;
  */
 trait ExtensionTrait
 {
-    public function getName(): string
-    {
-        return (new ReflectionClass($this))->getShortName();
+    public string $name {
+        get => new ReflectionClass($this)
+            ->getShortName();
     }
 
     public function loadGlobal(): void

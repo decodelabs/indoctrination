@@ -16,20 +16,20 @@ class Indoctrination implements Proxy
 {
     use ProxyTrait;
 
-    const Veneer = 'DecodeLabs\\Indoctrination';
-    const VeneerTarget = Inst::class;
+    public const Veneer = 'DecodeLabs\\Indoctrination';
+    public const VeneerTarget = Inst::class;
 
-    public static Inst $instance;
+    protected static Inst $_veneerInstance;
 
     public static function init(): void {}
     public static function getEntityManager(?string $name = NULL): Ref0 {
-        return static::$instance->getEntityManager(...func_get_args());
+        return static::$_veneerInstance->getEntityManager(...func_get_args());
     }
     public static function clearCache(): void {}
     public static function withJwt(Ref1 $payload, Ref2 $callback, Ref0|string|null $entityManager = NULL): mixed {
-        return static::$instance->withJwt(...func_get_args());
+        return static::$_veneerInstance->withJwt(...func_get_args());
     }
     public static function bypassJwt(Ref2 $callback, Ref0|string|null $entityManager = NULL): mixed {
-        return static::$instance->bypassJwt(...func_get_args());
+        return static::$_veneerInstance->bypassJwt(...func_get_args());
     }
 };

@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManager;
 
 interface Extension
 {
-    public function getName(): string;
+    public string $name { get; }
 
     public function loadGlobal(): void;
 
