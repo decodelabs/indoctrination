@@ -1,3 +1,14 @@
+## v0.3.0 (2025-02-17)
+* Converted accessors to property hooks
+* Updated Exceptional call signature
+* Removed Annotations MetadataType
+* Added @phpstan-require-implements constraints
+* Upgraded PHPStan to v2
+* Tidied boolean logic
+* Fixed Exceptional syntax
+* Added PHP8.4 to CI workflow
+* Made PHP8.4 minimum version
+
 ## v0.2.4 (2024-08-21)
 * Updated dependencies
 * Updated Veneer dependency and Stub

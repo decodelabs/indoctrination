@@ -61,10 +61,10 @@ class Uuid extends Type
             !is_string($value) &&
             !$value instanceof Stringable
         ) {
-            throw Exceptional::InvalidType([
-                'message' => 'Invalid type: ' . gettype($value),
-                'data' => $value
-            ]);
+            throw Exceptional::InvalidType(
+                message: 'Invalid type: ' . gettype($value),
+                data: $value
+            );
         }
 
         return Guidance::fromString($value);
@@ -77,10 +77,14 @@ class Uuid extends Type
         mixed $value,
         AbstractPlatform $platform
     ): ?string {
-        $toString = $this->hasNativeGuidType($platform) ? '__toString' : 'getBytes';
+        $hasNativeType = $this->hasNativeGuidType($platform);
 
         if ($value instanceof UuidObject) {
-            return $value->$toString();
+            if($hasNativeType) {
+                return $value->__toString();
+            } else {
+                return $value->getBytes();
+            }
         }
 
         if (
@@ -94,13 +98,19 @@ class Uuid extends Type
             !is_string($value) &&
             !$value instanceof Stringable
         ) {
-            throw Exceptional::InvalidType([
-                'message' => 'Invalid type: ' . gettype($value),
-                'data' => $value
-            ]);
+            throw Exceptional::InvalidType(
+                message: 'Invalid type: ' . gettype($value),
+                data: $value
+            );
         }
 
-        return Guidance::fromString($value)->$toString();
+        $uuid = Guidance::fromString($value);
+
+        if($hasNativeType) {
+            return $uuid->__toString();
+        } else {
+            return $uuid->getBytes();
+        }
     }
 
     public function requiresSQLCommentHint(

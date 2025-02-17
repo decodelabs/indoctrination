@@ -122,6 +122,7 @@ class SchemaIgnore implements Extension
             foreach ($keys as $target => $key) {
                 $table->addForeignKeyConstraint(
                     $target,
+                    // @phpstan-ignore-next-line
                     ...$key
                 );
             }
@@ -134,7 +135,9 @@ class SchemaIgnore implements Extension
     protected function getSchema(): Schema
     {
         if ($this->schema === null) {
-            throw Exceptional::Setup('Schema has not been captured yet');
+            throw Exceptional::Setup(
+                message: 'Schema has not been captured yet'
+            );
         }
 
         return $this->schema;

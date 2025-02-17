@@ -24,7 +24,7 @@ class Carbon implements Extension
     {
         if (!class_exists(DateTimeType::class)) {
             throw Exceptional::ComponentUnavailable(
-                'Carbon package is not available'
+                message: 'Carbon package is not available'
             );
         }
 

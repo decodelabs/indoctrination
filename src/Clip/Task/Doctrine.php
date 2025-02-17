@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace DecodeLabs\Clip\Task;
 
 use DecodeLabs\Clip\Task;
+use DecodeLabs\Coercion;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
 use DecodeLabs\Indoctrination;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -21,18 +22,24 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 class Doctrine implements Task
 {
-    protected const Commands = [];
+    protected const array Commands = [];
 
     public function execute(): bool
     {
         Indoctrination::clearCache();
 
-        unset($_SERVER['argv'][1]);
-        $_SERVER['argv'] = array_values($_SERVER['argv']);
-        $_SERVER['argc']--;
+        $argv = Coercion::forceArray($_SERVER['argv'] ?? []);
 
-        $command = $_SERVER['argv'][1] ?? '';
-        $target = explode(':', $command)[0] ?? '';
+        if(isset($argv[1])) {
+            unset($argv[1]);
+        }
+
+        $argv = array_values($argv);
+        $command = Coercion::toString($argv[1] ?? '');
+        $target = explode(':', $command)[0];
+
+        $_SERVER['argv'] = $argv;
+        $_SERVER['argc'] = count($argv);
 
         match ($target) {
             'migrations' => $this->runMigrations(),
