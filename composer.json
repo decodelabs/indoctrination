@@ -11,7 +11,7 @@
     "require": {
         "php": "^8.4",
 
-        "decodelabs/coercion": "^0.2.15",
+        "decodelabs/coercion": "^0.3",
         "decodelabs/dovetail": "^0.2.9",
         "decodelabs/exceptional": "^0.5.3",
         "decodelabs/guidance": "^0.1.13",
@@ -26,7 +26,7 @@
     "require-dev": {
         "decodelabs/cipher": "^0.2",
         "decodelabs/clip": "^0.3.16",
-        "decodelabs/genesis": "^0.10",
+        "decodelabs/genesis": "^0.11",
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "martin-georgiev/postgresql-for-doctrine": "^2.8",
