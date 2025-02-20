@@ -1,3 +1,7 @@
+## v0.3.1 (2025-02-20)
+* Upgraded Coercion dependency
+* Upgraded Genesis dependency
+
 ## v0.3.0 (2025-02-17)
 * Converted accessors to property hooks
 * Updated Exceptional call signature

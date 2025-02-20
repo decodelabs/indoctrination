@@ -145,7 +145,7 @@ class Context
         // Environment
         if (class_exists(Genesis::class)) {
             $devMode = !Genesis::$environment->isProduction();
-            $appPath = Genesis::$hub->getApplicationPath();
+            $appPath = Genesis::$hub->applicationPath;
         } else {
             $devMode = Dovetail::envString('ENV_MODE', 'production') !== 'production';
             $appPath = dirname(Dovetail::getFinder()->findEnv()?->getPath() ?? '');
@@ -174,7 +174,7 @@ class Context
         };
 
         if (class_exists(Genesis::class)) {
-            $output->setProxyDir(Genesis::$hub->getLocalDataPath() . '/doctrine/proxies');
+            $output->setProxyDir(Genesis::$hub->localDataPath . '/doctrine/proxies');
         }
 
 

@@ -28,14 +28,14 @@ class Doctrine implements Task
     {
         Indoctrination::clearCache();
 
-        $argv = Coercion::forceArray($_SERVER['argv'] ?? []);
+        $argv = Coercion::toArray($_SERVER['argv'] ?? []);
 
         if(isset($argv[1])) {
             unset($argv[1]);
         }
 
         $argv = array_values($argv);
-        $command = Coercion::toString($argv[1] ?? '');
+        $command = Coercion::asString($argv[1] ?? '');
         $target = explode(':', $command)[0];
 
         $_SERVER['argv'] = $argv;
