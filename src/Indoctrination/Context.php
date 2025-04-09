@@ -17,6 +17,8 @@ use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
 use DecodeLabs\Genesis;
 use DecodeLabs\Glitch\Dumper\Entity;
 use DecodeLabs\Indoctrination;
+use DecodeLabs\Monarch;
+use DecodeLabs\Pandora\Container as PandoraContainer;
 use DecodeLabs\Slingshot;
 use DecodeLabs\Stash;
 use DecodeLabs\Veneer;
@@ -56,12 +58,12 @@ class Context
 
         static::$init = true;
 
-        // Register in Genesis container
+        // Register in container
         if (
-            class_exists(Genesis::class) &&
-            !Genesis::$container->has(EntityManager::class)
+            !Monarch::$container->has(EntityManager::class) &&
+            Monarch::$container instanceof PandoraContainer
         ) {
-            Genesis::$container->bindShared(
+            Monarch::$container->bindShared(
                 EntityManager::class,
                 fn () => $this->getEntityManager()
             );
@@ -143,13 +145,8 @@ class Context
         $config = DoctrineConfig::load();
 
         // Environment
-        if (class_exists(Genesis::class)) {
-            $devMode = !Genesis::$environment->isProduction();
-            $appPath = Genesis::$hub->applicationPath;
-        } else {
-            $devMode = Dovetail::envString('ENV_MODE', 'production') !== 'production';
-            $appPath = dirname(Dovetail::getFinder()->findEnv()?->getPath() ?? '');
-        }
+        $appPath = Monarch::$paths->run;
+        $devMode = !Monarch::isProduction();
 
         // Paths
         $paths = [];
@@ -173,9 +170,7 @@ class Context
             )
         };
 
-        if (class_exists(Genesis::class)) {
-            $output->setProxyDir(Genesis::$hub->localDataPath . '/doctrine/proxies');
-        }
+        $output->setProxyDir(Monarch::$paths->localData . '/doctrine/proxies');
 
 
         // Schema filter
@@ -228,9 +223,7 @@ class Context
     protected function getSlingshot(): Slingshot
     {
         if (!$this->slingshot) {
-            $this->slingshot = new Slingshot(
-                class_exists(Genesis::class) ? Genesis::$container : null
-            );
+            $this->slingshot = new Slingshot();
         }
 
         return $this->slingshot;
