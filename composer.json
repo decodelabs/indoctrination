@@ -27,7 +27,6 @@
     "require-dev": {
         "decodelabs/cipher": "^0.2",
         "decodelabs/clip": "^0.4",
-        "decodelabs/genesis": "^0.12.1",
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "martin-georgiev/postgresql-for-doctrine": "^2.8",
