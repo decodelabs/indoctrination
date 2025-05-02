@@ -19,6 +19,6 @@ class Uuid extends AbstractIdGenerator
         EntityManagerInterface $entityManager,
         ?object $entity
     ): string {
-        return (string)Guidance::createV7();
+        return Guidance::createV7UuidString();
     }
 }
