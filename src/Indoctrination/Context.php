@@ -14,7 +14,6 @@ use DecodeLabs\Archetype;
 use DecodeLabs\Cipher\Payload as CipherPayload;
 use DecodeLabs\Dovetail;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
-use DecodeLabs\Genesis;
 use DecodeLabs\Glitch\Dumper\Entity;
 use DecodeLabs\Indoctrination;
 use DecodeLabs\Monarch;

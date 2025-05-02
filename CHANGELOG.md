@@ -1,3 +1,6 @@
+## v0.3.3 (2025-05-02)
+* Upgraded Guidance to v0.2.0
+
 ## v0.3.2 (2025-04-09)
 * Replaced Genesis info with Monarch
 

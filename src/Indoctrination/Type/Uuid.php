@@ -67,7 +67,7 @@ class Uuid extends Type
             );
         }
 
-        return Guidance::fromString($value);
+        return Guidance::uuidFromString($value);
     }
 
     /**
@@ -83,7 +83,7 @@ class Uuid extends Type
             if($hasNativeType) {
                 return $value->__toString();
             } else {
-                return $value->getBytes();
+                return $value->bytes;
             }
         }
 
@@ -104,12 +104,12 @@ class Uuid extends Type
             );
         }
 
-        $uuid = Guidance::fromString($value);
+        $uuid = Guidance::uuidFromString($value);
 
         if($hasNativeType) {
             return $uuid->__toString();
         } else {
-            return $uuid->getBytes();
+            return $uuid->bytes;
         }
     }
 
