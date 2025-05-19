@@ -26,11 +26,17 @@
     },
     "require-dev": {
         "decodelabs/cipher": "^0.2",
-        "decodelabs/clip": "^0.4",
+        "decodelabs/clip": "^0.5",
+        "decodelabs/commandment": "^0.1.1",
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "martin-georgiev/postgresql-for-doctrine": "^2.8",
         "nesbot/carbon": "^2|^3"
+    },
+    "conflict": {
+        "decodelabs/cipher": "<0.2",
+        "decodelabs/clip": "<0.5",
+        "decodelabs/commandment": "<0.1.1"
     },
     "suggest": {
         "decodelabs/cipher": "JWT token support",
@@ -43,7 +49,7 @@
             "DecodeLabs\\Indoctrination\\": "src/Indoctrination/"
         },
         "classmap": [
-            "src/Clip/",
+            "src/Commandment/",
             "src/Dovetail/"
         ],
         "files": [

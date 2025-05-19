@@ -7,10 +7,11 @@
 
 declare(strict_types=1);
 
-namespace DecodeLabs\Clip\Task;
+namespace DecodeLabs\Commandment\Action;
 
-use DecodeLabs\Clip\Task;
 use DecodeLabs\Coercion;
+use DecodeLabs\Commandment\Action;
+use DecodeLabs\Commandment\Request;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
 use DecodeLabs\Indoctrination;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -20,12 +21,13 @@ use Doctrine\Migrations\Tools\Console\ConsoleRunner as MigrationsConsoleRunner;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
-class Doctrine implements Task
+class Doctrine implements Action
 {
     protected const array Commands = [];
 
-    public function execute(): bool
-    {
+    public function execute(
+        Request $request
+    ): bool {
         Indoctrination::clearCache();
 
         $argv = Coercion::toArray($_SERVER['argv'] ?? []);
