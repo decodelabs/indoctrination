@@ -27,7 +27,7 @@
     "require-dev": {
         "decodelabs/cipher": "^0.2",
         "decodelabs/clip": "^0.5",
-        "decodelabs/commandment": "^0.1.1",
+        "decodelabs/commandment": "^0.2",
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "martin-georgiev/postgresql-for-doctrine": "^2.8",
@@ -36,7 +36,7 @@
     "conflict": {
         "decodelabs/cipher": "<0.2",
         "decodelabs/clip": "<0.5",
-        "decodelabs/commandment": "<0.1.1"
+        "decodelabs/commandment": "<0.2"
     },
     "suggest": {
         "decodelabs/cipher": "JWT token support",
