@@ -13,9 +13,9 @@
 
         "decodelabs/coercion": "^0.3",
         "decodelabs/dovetail": "^0.2.9",
-        "decodelabs/exceptional": "^0.5.3",
+        "decodelabs/exceptional": "^0.6",
         "decodelabs/guidance": "^0.2",
-        "decodelabs/monarch": "^0.1.1",
+        "decodelabs/monarch": "^0.1.3",
         "decodelabs/slingshot": "^0.2",
         "decodelabs/stash": "^0.6",
         "decodelabs/veneer": "^0.12.3",
@@ -31,7 +31,7 @@
         "decodelabs/phpstan-decodelabs": "^0.7",
 
         "martin-georgiev/postgresql-for-doctrine": "^2.8",
-        "nesbot/carbon": "^2|^3"
+        "nesbot/carbon": "^3"
     },
     "conflict": {
         "decodelabs/cipher": "<0.2",
