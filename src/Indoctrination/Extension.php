@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace DecodeLabs\Indoctrination;
 
 use Doctrine\DBAL\Schema\AbstractAsset;
+use Doctrine\DBAL\Schema\Name;
 use Doctrine\ORM\Configuration as OrmConfig;
 use Doctrine\ORM\EntityManager;
 
@@ -27,6 +28,9 @@ interface Extension
         EntityManager $entityManager
     ): void;
 
+    /**
+     * @param string|AbstractAsset<Name> $asset
+     */
     public function filterSchemaAsset(
         string|AbstractAsset $asset
     ): ?bool;

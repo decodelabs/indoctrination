@@ -32,7 +32,7 @@ class Doctrine implements Action
 
         $argv = Coercion::toArray($_SERVER['argv'] ?? []);
 
-        if(isset($argv[1])) {
+        if (isset($argv[1])) {
             unset($argv[1]);
         }
 

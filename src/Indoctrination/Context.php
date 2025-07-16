@@ -12,7 +12,6 @@ namespace DecodeLabs\Indoctrination;
 use Closure;
 use DecodeLabs\Archetype;
 use DecodeLabs\Cipher\Payload as CipherPayload;
-use DecodeLabs\Dovetail;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
 use DecodeLabs\Glitch\Dumper\Entity;
 use DecodeLabs\Indoctrination;

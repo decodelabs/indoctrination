@@ -13,6 +13,7 @@ use DecodeLabs\Exceptional;
 use DecodeLabs\Indoctrination\Extension;
 use DecodeLabs\Indoctrination\ExtensionTrait;
 use Doctrine\DBAL\Schema\AbstractAsset;
+use Doctrine\DBAL\Schema\Name;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
@@ -64,6 +65,9 @@ class SchemaIgnore implements Extension
         );
     }
 
+    /**
+     * @param string|AbstractAsset<Name> $asset
+     */
     public function filterSchemaAsset(
         string|AbstractAsset $asset
     ): ?bool {

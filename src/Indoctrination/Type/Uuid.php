@@ -80,7 +80,7 @@ class Uuid extends Type
         $hasNativeType = $this->hasNativeGuidType($platform);
 
         if ($value instanceof UuidObject) {
-            if($hasNativeType) {
+            if ($hasNativeType) {
                 return $value->__toString();
             } else {
                 return $value->bytes;
@@ -106,7 +106,7 @@ class Uuid extends Type
 
         $uuid = Guidance::uuidFromString($value);
 
-        if($hasNativeType) {
+        if ($hasNativeType) {
             return $uuid->__toString();
         } else {
             return $uuid->bytes;
