@@ -12,6 +12,7 @@ namespace DecodeLabs\Commandment\Action;
 use DecodeLabs\Coercion;
 use DecodeLabs\Commandment\Action;
 use DecodeLabs\Commandment\Request;
+use DecodeLabs\Dovetail;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
 use DecodeLabs\Indoctrination;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
@@ -25,10 +26,16 @@ class Doctrine implements Action
 {
     protected const array Commands = [];
 
+    public function __construct(
+        protected Dovetail $dovetail,
+        protected Indoctrination $indoctrination
+    ) {
+    }
+
     public function execute(
         Request $request
     ): bool {
-        Indoctrination::clearCache();
+        $this->indoctrination->clearCache();
 
         $argv = Coercion::toArray($_SERVER['argv'] ?? []);
 
@@ -53,7 +60,7 @@ class Doctrine implements Action
 
     protected function runRoot(): void
     {
-        $entityManager = Indoctrination::getEntityManager();
+        $entityManager = $this->indoctrination->getEntityManager();
 
         ConsoleRunner::run(
             new SingleManagerProvider($entityManager),
@@ -63,9 +70,9 @@ class Doctrine implements Action
 
     protected function runMigrations(): void
     {
-        $config = DoctrineConfig::load();
+        $config = $this->dovetail->load(DoctrineConfig::class);
         $migrationConfig = new ConfigurationArray($config->getMigrationsConfig());
-        $entityManager = Indoctrination::getEntityManager();
+        $entityManager = $this->indoctrination->getEntityManager();
         $dependencyFactory = DependencyFactory::fromEntityManager($migrationConfig, new ExistingEntityManager($entityManager));
         MigrationsConsoleRunner::run([], $dependencyFactory);
     }

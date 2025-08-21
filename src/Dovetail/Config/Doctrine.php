@@ -22,8 +22,8 @@ class Doctrine implements Config, IndoctrinationConfig
     {
         return [
             'default' => [
-                'sharedConnection' => "{{envString(['DATABASE_SHARED', 'DATABASE'])}}",
-                'adminConnection' => "{{envString(['DATABASE_ADMIN', 'DATABASE'])}}",
+                'sharedConnection' => "{{Env::asString(['DATABASE_SHARED', 'DATABASE'])}}",
+                'adminConnection' => "{{Env::asString(['DATABASE_ADMIN', 'DATABASE'])}}",
 
                 'paths' => [],
                 'metadata' => 'attributes',

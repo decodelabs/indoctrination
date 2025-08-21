@@ -12,6 +12,7 @@ namespace DecodeLabs\Indoctrination\Type;
 use DecodeLabs\Exceptional;
 use DecodeLabs\Guidance;
 use DecodeLabs\Guidance\Uuid as UuidObject;
+use DecodeLabs\Monarch;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use Stringable;
@@ -67,7 +68,8 @@ class Uuid extends Type
             );
         }
 
-        return Guidance::uuidFromString($value);
+        $guidance = Monarch::getService(Guidance::class);
+        return $guidance->uuidFromString($value);
     }
 
     /**
@@ -104,7 +106,8 @@ class Uuid extends Type
             );
         }
 
-        $uuid = Guidance::uuidFromString($value);
+        $guidance = Monarch::getService(Guidance::class);
+        $uuid = $guidance->uuidFromString($value);
 
         if ($hasNativeType) {
             return $uuid->__toString();

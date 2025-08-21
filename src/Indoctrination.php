@@ -7,19 +7,16 @@
 
 declare(strict_types=1);
 
-namespace DecodeLabs\Indoctrination;
+namespace DecodeLabs;
 
 use Closure;
-use DecodeLabs\Archetype;
 use DecodeLabs\Cipher\Payload as CipherPayload;
 use DecodeLabs\Dovetail\Config\Doctrine as DoctrineConfig;
-use DecodeLabs\Glitch\Dumper\Entity;
-use DecodeLabs\Indoctrination;
-use DecodeLabs\Monarch;
-use DecodeLabs\Pandora\Container as PandoraContainer;
-use DecodeLabs\Slingshot;
-use DecodeLabs\Stash;
-use DecodeLabs\Veneer;
+use DecodeLabs\Indoctrination\Extension;
+use DecodeLabs\Indoctrination\MetadataType;
+use DecodeLabs\Kingdom\ContainerAdapter;
+use DecodeLabs\Kingdom\Service;
+use DecodeLabs\Kingdom\ServiceTrait;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\AbstractAsset;
@@ -28,8 +25,10 @@ use Doctrine\ORM\Configuration as OrmConfig;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
-class Context
+class Indoctrination implements Service
 {
+    use ServiceTrait;
+
     protected static bool $init = false;
 
     /**
@@ -43,30 +42,32 @@ class Context
      */
     protected array $extensions = [];
 
-    public function __construct()
-    {
-        $this->init();
-    }
+    public static function provideService(
+        ContainerAdapter $container
+    ): static {
+        $output = $container->getOrCreate(static::class);
 
-    public function init(): void
-    {
-        if (static::$init) {
-            return;
-        }
-
-        static::$init = true;
-
-        // Register in container
-        if (
-            !Monarch::$container->has(EntityManager::class) &&
-            Monarch::$container instanceof PandoraContainer
-        ) {
-            Monarch::$container->bindShared(
+        if (!$container->has(EntityManager::class)) {
+            $container->setFactory(
                 EntityManager::class,
-                fn () => $this->getEntityManager()
+                fn () => $output->getEntityManager()
             );
         }
+
+        return $output;
     }
+
+    public function __construct(
+        protected DoctrineConfig $config,
+        protected Stash $stash,
+        ?EntityManager $entityManager = null
+    ) {
+        if ($entityManager) {
+            $this->entityManagers['default'] = $entityManager;
+        }
+    }
+
+
 
     /**
      * Get EntityManager for given name
@@ -116,10 +117,14 @@ class Context
         $slingshot = $this->getSlingshot();
         $extensions = [];
 
-        foreach (DoctrineConfig::load()->getExtensions($name) as $extName => $extConfig) {
-            $class = Archetype::resolve(Extension::class, $extName);
+        foreach ($this->config->getExtensions($name) as $extName => $extConfig) {
             /** @var array<string,mixed> $extConfig */
-            $extension = $slingshot->newInstance($class, $extConfig);
+            $extension = $slingshot->resolveNamedInstance(
+                interface: Extension::class,
+                name: $extName,
+                parameters: $extConfig
+            );
+
             $extName = $extension->name;
 
             if (!isset($this->extensions['__GLOBAL__'][$extName])) {
@@ -140,35 +145,32 @@ class Context
     protected function loadOrmConfig(
         string $name
     ): OrmConfig {
-        $config = DoctrineConfig::load();
-
         // Environment
-        $appPath = Monarch::$paths->run;
+        $appPath = Monarch::getPaths()->run;
         $devMode = !Monarch::isProduction();
 
         // Paths
         $paths = [];
 
-        foreach ($config->getPaths($name) as $path) {
+        foreach ($this->config->getPaths($name) as $path) {
             $paths[] = $appPath . '/' . $path;
         }
 
-
         // Orm Config
-        $output = match ($config->getMetadataType($name)) {
+        $output = match ($this->config->getMetadataType($name)) {
             MetadataType::Attributes => ORMSetup::createAttributeMetadataConfiguration(
                 paths: $paths,
                 isDevMode: $devMode,
-                cache: Stash::load(__CLASS__)
+                cache: $this->stash->load(__CLASS__)
             ),
             MetadataType::Xml => ORMSetup::createXMLMetadataConfiguration(
                 paths: $paths,
                 isDevMode: $devMode,
-                cache: Stash::load(__CLASS__)
+                cache: $this->stash->load(__CLASS__)
             )
         };
 
-        $output->setProxyDir(Monarch::$paths->localData . '/doctrine/proxies');
+        $output->setProxyDir(Monarch::getPaths()->localData . '/doctrine/proxies');
 
 
         // Schema filter
@@ -201,14 +203,12 @@ class Context
         string $name,
         OrmConfig $ormConfig
     ): Connection {
-        $config = DoctrineConfig::load();
-
         if (isset($_SERVER['HTTP_HOST'])) {
             // Shared connection for web
-            $dsn = $config->getSharedConnection($name);
+            $dsn = $this->config->getSharedConnection($name);
         } else {
             // Direct connection for cli
-            $dsn = $config->getAdminConnection($name);
+            $dsn = $this->config->getAdminConnection($name);
         }
 
         $connectionParams = (new DsnParser())->parse($dsn);
@@ -233,7 +233,7 @@ class Context
      */
     public function clearCache(): void
     {
-        Stash::load(__CLASS__)->clear();
+        $this->stash->load(__CLASS__)->clear();
     }
 
 
@@ -299,9 +299,3 @@ SQL
         });
     }
 }
-
-// Register
-Veneer\Manager::getGlobalManager()->register(
-    Context::class,
-    Indoctrination::class
-);
