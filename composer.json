@@ -15,7 +15,7 @@
         "decodelabs/dovetail": "^0.3",
         "decodelabs/exceptional": "^0.6.3",
         "decodelabs/guidance": "^0.3",
-        "decodelabs/kingdom": "^0.1",
+        "decodelabs/kingdom": "^0.2",
         "decodelabs/monarch": "^0.2.1",
         "decodelabs/slingshot": "^0.3",
         "decodelabs/stash": "^0.7",
@@ -61,7 +61,8 @@
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "decodelabs/genesis": true
         }
     }
 }
