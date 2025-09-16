@@ -18,7 +18,7 @@
         "decodelabs/kingdom": "^0.2",
         "decodelabs/monarch": "^0.2.1",
         "decodelabs/slingshot": "^0.3",
-        "decodelabs/stash": "^0.7",
+        "decodelabs/stash": "^0.8",
 
         "doctrine/orm": "^3.5.2",
         "doctrine/dbal": "^4.3.2",
