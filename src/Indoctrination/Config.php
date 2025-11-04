@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package Indoctrination
- * @license http://opensource.org/licenses/MIT
+ * Indoctrination
+ * @license https://opensource.org/licenses/MIT
  */
 
 declare(strict_types=1);
