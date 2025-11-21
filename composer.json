@@ -4,10 +4,12 @@
     "type": "library",
     "keywords": [ ],
     "license": "MIT",
-    "authors": [ {
+    "authors": [
+        {
             "name": "Tom Wright",
             "email": "tom@inflatablecookie.com"
-        } ],
+        }
+    ],
     "require": {
         "php": "^8.4",
 
@@ -25,6 +27,7 @@
         "doctrine/migrations": "^3.9.4"
     },
     "require-dev": {
+        "decodelabs/chorus": "^0.1",
         "decodelabs/cipher": "^0.3",
         "decodelabs/clip": "^0.6",
         "decodelabs/commandment": "^0.3",
