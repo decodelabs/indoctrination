@@ -27,7 +27,7 @@
         "doctrine/migrations": "^3.9.4"
     },
     "require-dev": {
-        "decodelabs/chorus": "^0.1",
+        "decodelabs/chorus": ">0",
         "decodelabs/cipher": "^0.3",
         "decodelabs/clip": "^0.6",
         "decodelabs/commandment": "^0.3",
